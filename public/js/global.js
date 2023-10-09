@@ -87,3 +87,71 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const showProfileFormButton = document.getElementById('showProfileFormButton');
+    const profileCreationForm = document.getElementById('profileCreationForm');
+
+    showProfileFormButton.addEventListener('click', function () {
+
+        if (profileCreationForm.style.display === 'none' || profileCreationForm.style.display === '') {
+            profileCreationForm.style.display = 'block';
+        } else {
+            profileCreationForm.style.display = 'none';
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const createProfileForm = document.getElementById('createProfileForm');
+    const skillsInput = document.getElementById('skills');
+
+    createProfileForm.addEventListener('submit', function(event) {
+        let isValid = true;
+
+
+        const formFields = createProfileForm.querySelectorAll('input, textarea');
+        formFields.forEach(function(field) {
+            const fieldValue = field.value.trim();
+
+
+            if (field.id !== 'profile_picture') {
+                if (fieldValue === '') {
+                    isValid = false;
+                }
+            }
+        });
+
+
+        const skillsValue = skillsInput.value.trim();
+        const skillsPattern = /^[a-zA-Z0-9\s]+(?:,\s*[a-zA-Z0-9\s]+)*$/
+        ;
+        if (skillsValue === '' || !skillsPattern.test(skillsValue)) {
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+            alert('Please fill in all required fields and enter skills in the format: skill1, skill2, skill3');
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    var editProfileBtn = document.getElementById('editProfileBtn');
+    var editProfileForm = document.getElementById('editProfileForm');
+
+
+    editProfileBtn.addEventListener('click', function () {
+
+        if (editProfileForm.style.display === 'none' || editProfileForm.style.display === '') {
+            editProfileForm.style.display = 'block';
+        } else {
+            editProfileForm.style.display = 'none';
+        }
+    });
+});
+
+

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,11 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/my-profile', [ProfileController::class, 'index'])->name('my-profile');
+
+Route::post('/my-profile', [ProfileController::class, 'createProfile'])->name('createProfile');
+
+Route::post('/my-profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+
 
