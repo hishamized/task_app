@@ -33,4 +33,7 @@
 </div>
 
     </div>
+    @auth 
+    <a href="{{ route('settings') }}" class="btn btn-primary">Settings</a>
+    @endauth
 @endsection
