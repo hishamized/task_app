@@ -52,4 +52,35 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    /**
+     * Check if the user is an admin.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        // Check if the 'is_admin' attribute is 1
+        if ($this->is_admin == 1) {
+            // Check if there is a corresponding row in the 'admins' table
+            return !!$this->admin;
+        }
+
+        return false;
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'user_id');
+    }
+
+    public function project_mates()
+    {
+        return $this->hasMany(ProjectMate::class, 'user_id');
+    }
 }
