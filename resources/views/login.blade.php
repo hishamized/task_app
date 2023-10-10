@@ -42,6 +42,7 @@
 
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    <a href="{{ route('password.reset') }}" class="btn btn-danger">Reset Password</a>
 </div>
 
 @endsection
