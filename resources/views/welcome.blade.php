@@ -29,4 +29,7 @@
         <h1>Welcome to the Task App</h1>
         <p>This is the Home page content.</p>
     </div>
+    @auth 
+    <a href="{{ route('settings') }}" class="btn btn-primary">Settings</a>
+    @endauth
 @endsection
