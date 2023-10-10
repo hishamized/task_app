@@ -28,5 +28,9 @@
     <div class="container mt-4">
         <h1>Welcome to the Task App</h1>
         <p>This is the Home page content.</p>
+        <div style="background-color: black;">
+   <a style="color: white;" href="{{ route('show_dashboard') }}"> Dashboard </a>
+</div>
+
     </div>
 @endsection

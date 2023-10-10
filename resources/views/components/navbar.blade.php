@@ -23,7 +23,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         @auth
-                        <li><a class="dropdown-item" href="{{ route('my-profile') }}">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ route('my-profile') }}">My Profile</a></li> 
                         @endauth
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li>
@@ -41,7 +41,6 @@
                     </form>
                 </li>
                 @endauth
-
             </ul>
         </div>
     </div>
