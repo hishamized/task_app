@@ -23,7 +23,7 @@ class AdminController extends Controller
 
         if ($adminProjects->isEmpty()) {
 
-            return redirect()->route('adminDashboard');
+            return redirect()->route('showAdminDashboard')->with('status', 'You have no projects yet!');
         } else {
 
             return view('admin.adminDashboard', ['adminProjects' => $adminProjects]);
