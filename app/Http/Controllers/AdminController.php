@@ -23,7 +23,8 @@ class AdminController extends Controller
 
         if ($adminProjects->isEmpty()) {
 
-            return view('admin.adminDashboard');
+            return view('admin.adminDashboard')->with('status', 'You have no projects yet!');
+
         } else {
 
             return view('admin.adminDashboard', ['adminProjects' => $adminProjects]);
