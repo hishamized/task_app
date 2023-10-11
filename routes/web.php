@@ -4,10 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProjectController;use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
@@ -110,28 +108,7 @@ Route::post('/Settings/password/reset', [SettingsController::class,'resetPasswor
 Route::middleware(['auth'])->group(function () {
     // Define your settings routes here
 });
-Route::get('/settings', 'App\Http\Controllers\SettingsController@index')->name('settings');
-
-Route::post('/my-profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
-
-Route::get('/admin-dashboard', [AdminController::class, 'showAdminDashboard'])
-    ->name('showAdminDashboard');
-
-Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
-
-Route::get('/admin-dashboard/{id}', [ProjectController::class, 'viewProject'])->name('project.view');
-
-Route::post('/edit-project', [ProjectController::class, 'editProject'])->name('editProject');
-
-Route::post('/add-people', [ProjectController::class, 'addPeople'])->name('addPeople');
-
-Route::get('/remove-project-mate/{projectMate}', [ProjectController::class, 'removeProjectMate'])->name('removeProjectMate');
-
-
-
-
-
-Route::get('/admin-dashboard', [AdminController::class, 'showAdminDashboard'])
+Route::get('/settings', 'App\Http\Controllers\SettingsController@index')->name('settings');Route::get('/admin-dashboard', [AdminController::class, 'showAdminDashboard'])
     ->name('showAdminDashboard');
 
 Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
