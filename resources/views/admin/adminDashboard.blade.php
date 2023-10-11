@@ -24,10 +24,10 @@
 </div>
 @endif
 
-<div class="container-fluid">
+<div class="container-fluid" id="admin-dashboard">
     <div class="row">
-        <!-- Sidebar -->
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -42,6 +42,7 @@
                 </ul>
             </div>
         </nav>
+
 
         <!-- Content Section -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
