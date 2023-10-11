@@ -34,4 +34,12 @@ class Project extends Model
     public function project_mates(){
         return $this->hasMany(ProjectMate::class, 'project_id');
     }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'project_id');
+    }
+    public function task_assignments()
+    {
+        return $this->hasMany(TaskAssignment::class, 'project_id');
+    }
 }

@@ -25,4 +25,12 @@ class Admin extends Model
     {
         return $this->hasMany(Project::class, 'admin_id');
     }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'admin_id');
+    }
+    public function task_assignments()
+    {
+        return $this->hasMany(TaskAssignment::class, 'admin_id');
+    }
 }

@@ -75,6 +75,76 @@
 </div>
 
 
+<div class="container mt-4">
+    <button id="showTaskFormButton" class="btn btn-primary">Create Task</button>
+
+
+
+    <div id="taskForm" style="display: none">
+        <form action="{{ route('createTask') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="project_id" value="{{ $project->id }}">
+
+            <input type="hidden" name="admin_id" value="{{ auth()->user()->admin->id }}">
+
+            <div class="mb-3">
+                <label for="task_title" class="form-label">Task Title</label>
+                <input type="text" name="task_title" id="task_title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="task_description" class="form-label">Task Description</label>
+                <textarea name="task_description" id="task_description" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="task_objectives" class="form-label">Task Objectives</label>
+                <textarea name="task_objectives" id="task_objectives" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="creation_date" class="form-label">Creation Date</label>
+                <input type="date" name="creation_date" id="creation_date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="deadline" class="form-label">Deadline</label>
+                <input type="date" name="deadline" id="deadline" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" id="status" class="form-select">
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Paused">Paused</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="priority" class="form-label">Priority</label>
+                <select name="priority" id="priority" class="form-select">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="progress" class="form-label">Progress (%)</label>
+                <input type="number" name="progress" id="progress" class="form-control" min="0" max="100" step="1">
+            </div>
+
+            <button type="submit" class="btn btn-success">Create</button>
+        </form>
+
+    </div>
+</div>
+
+
 
 <div class="container mt-5">
 
@@ -93,6 +163,7 @@
         </form>
 
     </div>
+
 
 
     @if(isset($project) && !empty($project))
@@ -123,6 +194,21 @@
             </ul>
         </div>
 
+        <div class="container mt-4 my-3">
+
+            <ul class="list-group">
+                <h4>Tasks for this project:</h4>
+                @foreach ($project->tasks as $task)
+                <li class="list-group-item">
+                    <h5>Task ID: {{ $task->id }}</h5>
+                    <p><strong>Task Title:</strong> {{ $task->task_title }}</p>
+                    <p><strong>Deadline:</strong> {{ $task->deadline }}</p>
+                    <p><strong>Status:</strong> {{ $task->status }}</p>
+                    <a href="{{ route('showTaskAdmin', ['taskId' => $task->id]) }}" class="btn btn-primary">View Task</a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
     @else
     <p>No project data available.</p>

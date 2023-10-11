@@ -10,25 +10,25 @@
                 <div class="position-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active sidebar-link" data-section="section1">Assigned Task</a>
+                            <a href="#" class="nav-link active sidebar-link" data-section="section1">Assigned Task</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sidebar-link" data-section="section2">My Projects</a>
+                            <a href="#" class="nav-link sidebar-link" data-section="section2">My Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sidebar-link" data-section="section3">Important Tasks</a>
+                            <a href="#" class="nav-link sidebar-link" data-section="section3">Important Tasks</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sidebar-link" data-section="section4">Update Tasks</a>
+                            <a href="#" class="nav-link sidebar-link" data-section="section4">Update Tasks</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sidebar-link" data-section="section5">Apply Leave</a>
+                            <a href="#" class="nav-link sidebar-link" data-section="section5">Apply Leave</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sidebar-link" data-section="section6">View Leave Status</a>
+                            <a href="#" class="nav-link sidebar-link" data-section="section6">View Leave Status</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link sidebar-link" data-section="section7">Employees Rewards and Scores</a>
+                            <a href="#" class="nav-link sidebar-link" data-section="section7">Employees Rewards and Scores</a>
                         </li>
                     </ul>
                 </div>

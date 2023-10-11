@@ -48,6 +48,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+        /**
+     * Find a user by username or email.
+     *
+     * @param string $userIdentifier
+     * @return \App\Models\User|null
+     */
+    public static function findByUsernameOrEmail($userIdentifier)
+    {
+        return static::where('email', $userIdentifier)
+            ->orWhere('username', $userIdentifier)
+            ->first();
+    }
+
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -69,6 +83,7 @@ class User extends Authenticatable
         return false;
     }
 
+
     public function admin()
     {
         return $this->hasOne(Admin::class);
@@ -82,5 +97,13 @@ class User extends Authenticatable
     public function project_mates()
     {
         return $this->hasMany(ProjectMate::class, 'user_id');
+    }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'user_id');
+    }
+    public function task_assignments()
+    {
+        return $this->hasMany(TaskAssignment::class, 'user_id');
     }
 }
