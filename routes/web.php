@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -143,3 +144,14 @@ Route::middleware(['auth'])->group(function () {
     // Define your settings routes here
 });
 Route::get('/settings', 'App\Http\Controllers\SettingsController@index')->name('settings');
+
+Route::post('/create-task', [TaskController::class, 'createTask'])->name('createTask');
+
+Route::get('/tasksAdmin/{taskId}', [TaskController::class, 'showTaskAdmin'])->name('showTaskAdmin');
+
+Route::post('/editTask', [TaskController::class, 'editTask'])->name('editTask');
+
+Route::post('/assignTask', [TaskController::class, 'assignTask'])->name('assignTask');
+
+Route::delete('/removeUserFromTask/{userId}/{taskId}', [TaskController::class, 'removeUserFromTask'])->name('removeUserFromTask');
+
