@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 /*
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -154,4 +155,6 @@ Route::post('/editTask', [TaskController::class, 'editTask'])->name('editTask');
 Route::post('/assignTask', [TaskController::class, 'assignTask'])->name('assignTask');
 
 Route::delete('/removeUserFromTask/{userId}/{taskId}', [TaskController::class, 'removeUserFromTask'])->name('removeUserFromTask');
+
+Route::post('/submit-leave-application', [DashboardController::class, 'submitLeaveApplication'])->name('submitLeaveApplication');
 
