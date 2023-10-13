@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class SettingsController extends Controller
 {
     public function index()
     {
-        return view('settings');
+        return view('authentication.settings');
     }
 
     public function showPasswordForm()
     {
-        return view('passwords.change');
+        return view('authentication.change');
     }
 
     public function changePassword(Request $request)
@@ -39,12 +40,28 @@ class SettingsController extends Controller
 
     public function showPasswordResetForm()
     {
-        return view('passwords.reset');
+        return view('authentication.reset');
     }
 
     public function resetPassword(Request $request)
     {
-        // Logic for resetting the password goes here
+    }
+
+    public function showSearchPage()
+    {
+        $matchedUsers = [];
+
+        return view('search', compact('matchedUsers'));
+    }
+    public function searchUsers(Request $request)
+    {
+        $searchInput = $request->input('search_input');
+
+        $matchedUsers = User::where('name', 'like', '%' . $searchInput . '%')
+            ->orWhere('email', 'like', '%' . $searchInput . '%')
+            ->orWhere('username', 'like', '%' . $searchInput . '%')
+            ->get();
+
+        return view('search', ['matchedUsers' => $matchedUsers]);
     }
 }
-

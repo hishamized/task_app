@@ -6,20 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\ProjectMate;
 use App\Models\User;
+use App\Models\ProjectHistory;
 
 class ProjectController extends Controller
 {
     public function viewProject($id)
     {
-
-        $project = Project::with('project_mates')->find($id);
+        $project = Project::with(['project_mates', 'project_history'])->find($id);
 
         if (!$project) {
             return redirect()->route('showAdminDashboard')->with('error', 'Project not found.');
         }
 
-        return view('projects.project', ['project' => $project]);
+        return view('projects.project', compact('project'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -70,60 +71,82 @@ class ProjectController extends Controller
         $project->update($validatedData);
 
         return back()->with('success', 'Project updated successfully.');
-
     }
 
     public function addPeople(Request $request)
-{
+    {
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'userIdentifier' => 'required',
+        ]);
 
-    $request->validate([
-        'project_id' => 'required|exists:projects,id',
-        'userIdentifier' => 'required',
-    ]);
+        $userIdentifier = $request->input('userIdentifier');
+        $field = filter_var($userIdentifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $user = User::where($field, $userIdentifier)->first();
+
+        if (!$user) {
+            return back()->with('error', 'No such user exists.');
+        }
+
+        $projectID = $request->input('project_id');
+        $existingMate = ProjectMate::where('user_id', $user->id)->where('project_id', $projectID)->first();
+
+        if ($existingMate) {
+            return back()->with('warning', 'User is already associated with this project.');
+        }
 
 
-    $userIdentifier = $request->input('userIdentifier');
-    $field = filter_var($userIdentifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        ProjectHistory::create([
+            'project_id' => $projectID,
+            'user_id' => $user->id,
+            'admin_id' => auth()->user()->admin->id,
+            'action' => 'Added',
+            'action_date' => now(),
+            'user_assignment_date' => now(),
+        ]);
 
+        ProjectMate::create([
+            'user_id' => $user->id,
+            'project_id' => $projectID,
+        ]);
 
-    $user = User::where($field, $userIdentifier)->first();
-
-    if (!$user) {
-
-        return back()->with('error', 'No such user exists.');
+        return back()->with('success', 'User added to the project successfully.');
     }
 
 
-    $projectID = $request->input('project_id');
-    $existingMate = ProjectMate::where('user_id', $user->id)->where('project_id', $projectID)->first();
+    public function removeProjectMate(ProjectMate $projectMate)
+    {
+        if (!$projectMate) {
+            return back()->with('error', 'Project Mate not found.');
+        }
 
-    if ($existingMate) {
+        $userAssignmentDate = $projectMate->created_at->toDateString();
 
-        return back()->with('warning', 'User is already associated with this project.');
+
+        ProjectHistory::create([
+            'project_id' => $projectMate->project_id,
+            'user_id' => $projectMate->user_id,
+            'admin_id' => auth()->user()->admin->id,
+            'action' => 'Removed',
+            'action_date' => now()->toDateString(),
+            'user_assignment_date' => $userAssignmentDate,
+        ]);
+
+        $projectMate->delete();
+
+        return back()->with('success', 'Project Mate removed successfully.');
     }
 
+    public function showProject($id)
+    {
 
-    ProjectMate::create([
-        'user_id' => $user->id,
-        'project_id' => $projectID,
-    ]);
+        $project = Project::find($id);
 
+        if (!$project) {
 
-    return back()->with('success', 'User added to the project successfully.');
-}
+            abort(404);
+        }
 
-public function removeProjectMate(ProjectMate $projectMate)
-{
-
-    if (!$projectMate) {
-        return back()->with('error', 'Project Mate not found.');
+        return view('projects.showProject', compact('project'));
     }
-
-
-    $projectMate->delete();
-
-    return back()->with('success', 'Project Mate removed successfully.');
 }
-
-}
-

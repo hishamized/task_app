@@ -154,7 +154,32 @@ Route::post('/editTask', [TaskController::class, 'editTask'])->name('editTask');
 
 Route::post('/assignTask', [TaskController::class, 'assignTask'])->name('assignTask');
 
-Route::delete('/removeUserFromTask/{userId}/{taskId}', [TaskController::class, 'removeUserFromTask'])->name('removeUserFromTask');
+Route::delete('/removeUserFromTask/{userId}/{taskId}/{projectId}', [TaskController::class, 'removeUserFromTask'])->name('removeUserFromTask');
 
 Route::post('/submit-leave-application', [DashboardController::class, 'submitLeaveApplication'])->name('submitLeaveApplication');
+
+Route::get('/leave-application-show/{id}', [AdminController::class, 'showLeaveApplication'])->name('leaveApplication');
+
+Route::put('/admin/leave-application/{id}/change-status', [AdminController::class, 'changeLeaveStatus'])->name('adminLeaveChangeStatus');
+
+Route::get('/project/view/{id}', [ProjectController::class, 'showProject'])->name('project.show');
+
+Route::get('/employee/tasks/view/{id}', [TaskController::class, 'viewTask'])->name('viewTask');
+
+Route::get('/profile/view/{id}', [ProfileController::class, 'viewGeneralProfile'])->name('viewUserProfile');
+
+Route::get('/leave-application-view/{id}', [DashboardController::class, 'viewLeaveApplication'])->name('viewLeaveApplication');
+
+Route::put('/leave/{id}', [DashboardController::class, 'updateLeave'])->name('leave.update');
+
+Route::get('/search-page', [SettingsController::class, 'showSearchPage'])->name('showSearchPage');
+
+Route::post('/search-users', [SettingsController::class, 'searchUsers'])->name('searchUsers');
+
+
+
+
+
+
+
 

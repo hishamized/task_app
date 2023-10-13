@@ -20,7 +20,7 @@ class ProfileController extends Controller
             return view('profile');
         }
 
-        return view('profile', ['userProfile' => $userProfile]);
+        return view('profiles.profile', ['userProfile' => $userProfile]);
     }
 
     public function createProfile(Request $request)
@@ -160,6 +160,17 @@ public function updateProfile(Request $request)
 
 
     return redirect()->route('my-profile')->with('success', 'Profile updated successfully');
+}
+
+public function viewGeneralProfile($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found.');
+    }
+
+    return view('profiles.generalProfile', compact('user'));
 }
 
 

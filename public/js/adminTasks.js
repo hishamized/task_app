@@ -29,3 +29,20 @@
         }
     });
 })();
+
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        const viewHistoryBtn = document.getElementById('viewHistoryBtn');
+        const taskHistoryTable = document.getElementById('taskHistoryTable');
+
+        viewHistoryBtn.addEventListener('click', function () {
+            if (taskHistoryTable.style.display === 'none') {
+                taskHistoryTable.style.display = 'table';
+            } else {
+                taskHistoryTable.style.display = 'none';
+            }
+        });
+    });
+})();
+
+
