@@ -25,17 +25,6 @@
     </ul>
 </div>
 @endif
-<div class="container mt-4">
-    <h1>Welcome to the Task App</h1>
-    <p>This is the Home page content.</p>
-</div>
-@auth
-@if(auth()->user()->isAdmin())
-<div class="container mt-4">
-    <a href="{{ route('showAdminDashboard') }}" class="btn btn-primary">Admin Dashboard</a>
-</div>
-@endif
-@endauth
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -47,13 +36,24 @@
 </div>
 @endif
 <div class="container mt-4">
-    <a href="{{ route('show_dashboard') }}" class="btn btn-primary"> Employee Dashboard </a>
-</div>
-
+    <h1>Welcome to the Task App</h1>
+    <p>This is the Home page content.</p>
 </div>
 @auth
+@if(auth()->user()->isAdmin())
 <div class="container mt-4">
-<a href="{{ route('settings') }}" class="btn btn-primary">Settings</a>
+    <a href="{{ route('showAdminDashboard') }}" class="btn btn-primary">Admin Dashboard</a>
+</div>
+@endif
+<div class="container mt-4">
+    <a href="{{ route('show_dashboard') }}" class="btn btn-primary"> Employee Dashboard </a>
+</div>
+<div class="container mt-4">
+    <a href="{{ route('settings') }}" class="btn btn-primary">Settings</a>
+</div>
+<div class="container mt-4">
+    <a href="{{ route('showSearchPage') }}" class="btn btn-primary">Search Users</a>
+
 </div>
 @endauth
 @endsection

@@ -186,6 +186,7 @@
                 @foreach($project->project_mates as $mate)
                 <li class="list-group-item">
                     {{ $mate->user->name }}
+                    <a href="{{ route('viewUserProfile', ['id' => $mate->user->id]) }}" class="btn btn-primary btn-sm float-end ms-4">View User Profile</a>
                     <a href="#" class="btn btn-danger btn-sm float-end remove-mate-button" data-removal-url="{{ route('removeProjectMate', ['projectMate' => $mate->id]) }}">
                         Remove from Project
                     </a>
@@ -214,5 +215,39 @@
     <p>No project data available.</p>
     @endif
 </div>
+
+<div class="container mt-4 my-3">
+     <!-- Button to toggle project history -->
+     <button id="toggleProjectHistory" class="btn btn-primary mt-3">View Project History</button>
+
+<!-- Bootstrap table for project history -->
+<table id="projectHistoryTable" class="table table-bordered table-striped mt-3" style="display: none;">
+    <thead>
+        <tr>
+            <th>Project Title</th>
+            <th>User Involved</th>
+            <th>Action</th>
+            <th>Action Date</th>
+            <th>User Assignment Date</th>
+            <th>On authority of</th>
+            <!-- Add more table headers as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($project->project_history as $history)
+            <tr>
+                <td> {{ $history->project->title }} </td>
+                <td> {{ $history->user->name }} </td>
+                <td>{{ $history->action }}</td>
+                <td>{{ $history->action_date }}</td>
+                <td>{{ $history->user_assignment_date }}</td>
+                <td>{{ $history->admin->user->name }}</td>
+                <!-- Add more table data columns as needed -->
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
 <script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('js/adminProjects.js') }}"></script>
 @endsection

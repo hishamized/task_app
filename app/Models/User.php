@@ -48,7 +48,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-        /**
+    /**
      * Find a user by username or email.
      *
      * @param string $userIdentifier
@@ -107,7 +107,15 @@ class User extends Authenticatable
         return $this->hasMany(TaskAssignment::class, 'user_id');
     }
     public function leaves()
-{
-    return $this->hasMany(Leave::class, 'user_id', 'id');
-}
+    {
+        return $this->hasMany(Leave::class, 'user_id', 'id');
+    }
+    public function project_history()
+    {
+        return $this->hasMany(ProjectHistory::class, 'user_id');
+    }
+    public function task_history()
+    {
+        return $this->hasMany(TaskHistory::class, 'user_id');
+    }
 }

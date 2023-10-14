@@ -26,8 +26,8 @@
 
 <div class="container-fluid" id="admin-dashboard">
     <div class="row">
-            <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -37,7 +37,7 @@
                         <a class="nav-link" href="#section2">My Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#section3">Section 3</a>
+                        <a class="nav-link" href="#section3">Leave Applications</a>
                     </li>
                 </ul>
             </div>
@@ -111,7 +111,39 @@
 
             </div>
             <div id="section3" class="section-content">
-                <h1>Section 3 Content</h1>
+                <div class="container mt-4">
+                    <h2>List of Leave Applications</h2>
+
+                    <table class="table table-bordered my-3">
+                        <thead>
+                            <tr>
+                                <th>Leave ID</th>
+                                <th>User</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Subject</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($leaveApplications as $leave)
+                            <tr>
+                                <td>{{ $leave->id }}</td>
+                                <td>{{ $leave->user->name }}</td> <!-- Assuming user relation is defined -->
+                                <td>{{ $leave->start_date }}</td>
+                                <td>{{ $leave->end_date }}</td>
+                                <td>{{ $leave->subject }}</td>
+                                <td>{{ $leave->status }}</td>
+                                <td>
+                                    <a href="{{ route('leaveApplication', ['id' => $leave->id]) }}" class="btn btn-primary">View Application</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </main>
     </div>

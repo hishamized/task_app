@@ -33,4 +33,12 @@ class Admin extends Model
     {
         return $this->hasMany(TaskAssignment::class, 'admin_id');
     }
+    public function project_histories()
+    {
+        return $this->hasMany(ProjectHistory::class, 'admin_id');
+    }
+    public function task_histories()
+    {
+        return $this->hasMany(TaskHistory::class, 'admin_id');
+    }
 }

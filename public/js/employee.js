@@ -35,3 +35,18 @@ navLinks.forEach((link) => {
         }
     });
 });
+
+(function () {
+    const editButtons = document.querySelectorAll('.leave-edit-button');
+    const editForms = document.querySelectorAll('.leave-edit-form');
+
+    editButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            if (editForms[index].style.display === 'none') {
+                editForms[index].style.display = 'block';
+            } else {
+                editForms[index].style.display = 'none';
+            }
+        });
+    });
+})();

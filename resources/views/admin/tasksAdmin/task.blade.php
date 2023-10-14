@@ -24,9 +24,9 @@
 @endif
 
 @if (Session::has('error'))
-    <div class="alert alert-danger">
-        {{ Session::get('error') }}
-    </div>
+<div class="alert alert-danger">
+    {{ Session::get('error') }}
+</div>
 @endif
 
 @if(session('warning'))
@@ -149,28 +149,63 @@
         </div>
         <div class="card-body">
             @if ($assignedUsers->isEmpty())
-                <p>No users have been assigned to this task.</p>
+            <p>No users have been assigned to this task.</p>
             @else
-                <ul class="list-group">
-                    @foreach ($assignedUsers as $assignment)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ $assignment->user->name }} ({{ $assignment->user->email }})
+            <ul class="list-group">
+                @foreach ($assignedUsers as $assignment)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ $assignment->user->name }} ({{ $assignment->user->email }})
+                    <a href="{{ route('viewUserProfile', ['id' => $assignment->user->id]) }}" class="btn btn-primary btn-sm float-end ms-4">View User Profile</a>
 
-                            <form action="{{ route('removeUserFromTask', ['userId' => $assignment->user->id, 'taskId' => $task->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
+                    <form action="{{ route('removeUserFromTask', ['userId' => $assignment->user->id, 'taskId' => $task->id, 'projectId' => $task->project->id ]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger">Remove</button>
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+
+                </li>
+                @endforeach
+            </ul>
             @endif
         </div>
     </div>
 </div>
 
+<div class="container mt-5 my2">
+    <button id="viewHistoryBtn" class="btn btn-primary">View History</button>
+    <table id="taskHistoryTable" class="table table-bordered my-3 table-striped table-hover table-responsive" style="display: none;">
+    <thead>
+        <tr>
+            <th>Project Title</th>
+            <th>Task Title</th>
+            <th>User Involved</th>
+            <th>Action</th>
+            <th>Assigned Date</th>
+            <th>Action Date</th>
+            <th>On authority of</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Use a loop to populate the table with task history data -->
+        @foreach ($taskHistory as $history)
+        <tr>
+            <td>{{ $history->project->title }}</td>
+            <td>{{ $history->task->task_title }}</td>
+            <td>{{ $history->user->name }}</td>
+            <td>{{ $history->action }}</td>
+            <td>{{ $history->user_assignment_date }}</td>
+            <td>{{ $history->action_date }}</td>
+            <td>{{ $history->admin->user->name }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 
-<script src="{{ asset('js/tasks.js') }}"></script>
+</div>
+
+
+
+<script src="{{ asset('js/adminTasks.js') }}"></script>
 @endsection
