@@ -176,6 +176,13 @@ Route::get('/search-page', [SettingsController::class, 'showSearchPage'])->name(
 
 Route::post('/search-users', [SettingsController::class, 'searchUsers'])->name('searchUsers');
 
+Route::post('/admin/grant-admin-privileges/{id}', [AdminController::class, 'grantAdminPrivileges'])->name('adminGrantAdminPrivileges');
+
+Route::put('/task/{id}/update-status', [TaskController::class, 'updateStatus'])->name('task.update-status');
+Route::put('/task/{id}/update-progress', [TaskController::class, 'updateProgress'])->name('task.update-progress');
+
+Route::put('/task/{id}/update', [TaskController::class, 'update'])->name('task.update');
+
 
 
 

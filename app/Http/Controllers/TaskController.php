@@ -172,4 +172,18 @@ public function viewTask($id)
     return view('employee.tasks.viewTask', compact('task'));
 }
 
+public function update(Request $request, $id)
+{
+    $task = Task::findOrFail($id);
+
+    $task->status = $request->input('status');
+    $task->progress = $request->input('progress');
+
+    $task->save();
+
+    return redirect()->route('viewTask', ['id' => $task->id])
+        ->with('success', 'Task status and progress updated successfully.');
+}
+
+
 }

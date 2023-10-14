@@ -1,6 +1,27 @@
 @extends('layout.app')
 
 @section('content')
+@if (session('status'))
+<div class="alert alert-success">
+    {{ session('status') }}
+</div>
+@endif
+
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 mx-auto">
@@ -77,7 +98,30 @@
                     <h6>Salary</h6>
                     <p>{{ $user->profile->salary }}</p>
                     @endif
+                    <div class="alert alert-{{ $user->is_admin ? 'success' : 'warning' }}">
+                        @if($user->is_admin)
+                        The user has admin privileges
+                        @else
+                        The user does not have admin privileges
+                        @endif
+                    </div>
+
                 </div>
+                <div class="m-4">
+                    @if (auth()->user()->is_admin && !$user->is_admin)
+                    <form action="{{ route('adminGrantAdminPrivileges', ['id' => $user->id]) }}" method="POST">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Enter Admin Password:</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Grant Administrator Privileges</button>
+                    </form>
+                    @endif
+                </div>
+
             </div>
         </div>
     </div>

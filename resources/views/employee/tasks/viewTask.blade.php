@@ -38,9 +38,31 @@
             <p class="card-text"><strong>Priority:</strong> {{ $task->priority }}</p>
             <p class="card-text"><strong>Progress:</strong> {{ $task->progress }}%</p>
 
-            <a href="{{ route('project.view', ['id' => $task->project->id]) }}" class="btn btn-secondary">View Project</a>
+            <a href="{{ route('project.show', ['id' => $task->project->id]) }}" class="btn btn-secondary">View Project</a>
             <a href="{{ route('show_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
         </div>
+        <form class="mx-3" action="{{ route('task.update', ['id' => $task->id]) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status:</label>
+                <select name="status" id="status" class="form-select">
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Paused">Paused</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="progress" class="form-label">Progress:</label>
+                <input type="range" name="progress" id="progress" class="form-range" min="0" max="100" step="1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Status and Progress</button>
+        </form>
     </div>
 </div>
 @endsection

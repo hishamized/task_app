@@ -119,7 +119,7 @@
                         <a href="{{ route('viewTask', ['id' => $task->id]) }}" class="btn btn-primary btn-sm float-end">View Task</a>
                     </li>
                     @endif
-                    <p>No high priority tasks for you right now.</p>
+                    <p>No further high priority tasks for you right now.</p>
                     @endforeach
                 </ul>
             </div>
