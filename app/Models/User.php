@@ -25,6 +25,7 @@ class User extends Authenticatable
         'username',
         'phone_country_code',
         'phone_number',
+        'is_admin',
         'password',
     ];
 

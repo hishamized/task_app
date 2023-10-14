@@ -38,7 +38,7 @@
             <p class="card-text"><strong>Priority:</strong> {{ $task->priority }}</p>
             <p class="card-text"><strong>Progress:</strong> {{ $task->progress }}%</p>
 
-            <a href="{{ route('project.view', ['id' => $task->project->id]) }}" class="btn btn-secondary">View Project</a>
+            <a href="{{ route('project.show', ['id' => $task->project->id]) }}" class="btn btn-secondary">View Project</a>
             <a href="{{ route('show_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
         </div>
     </div>

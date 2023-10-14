@@ -34,6 +34,7 @@ public function signup(Request $request)
     $user->username = $request->input('username');
     $user->phone_country_code = $request->input('phone_country_code');
     $user->phone_number = $request->input('phone_number');
+    $user->is_admin = 0;
     $user->password = Hash::make($request->input('password'));
 
 

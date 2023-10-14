@@ -176,7 +176,7 @@ Route::get('/search-page', [SettingsController::class, 'showSearchPage'])->name(
 
 Route::post('/search-users', [SettingsController::class, 'searchUsers'])->name('searchUsers');
 
-
+Route::post('/admin/grant-admin-privileges/{id}', [AdminController::class, 'grantAdminPrivileges'])->name('adminGrantAdminPrivileges');
 
 
 
